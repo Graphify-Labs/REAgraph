@@ -91,6 +91,11 @@ class LocalCacheBackend(CacheBackend):
 
     # -- path layout ------------------------------------------------------
     def _path(self, key: str) -> Path:
+        # Keys are sha256 hex digests (see Cache.key_for). Reject anything
+        # that could act as a path segment: a key handed back by a remote
+        # cache backend must never escape the cache dir.
+        if "/" in key or "\\" in key or key in (".", ".."):
+            raise ValueError(f"invalid cache key: {key!r}")
         # Shard on the first two chars; the rest is the filename.
         safe = key if len(key) >= 3 else f"_{key}_"
         return self.dir / safe[:2] / (safe[2:] + ".json")
