@@ -40,7 +40,9 @@ from . import rea_adapter
 # prints help and exits, so without it the handshake closes on connect. Verified
 # against rea-agents (its ``--help`` lists ``--mcp`` as "Start as MCP stdio
 # server"). Override the whole command via the constructor or REAGRAPH_REA_CMD.
-DEFAULT_SERVER_CMD = ["npx", "-y", "rea-agents@latest", "--mcp"]
+# Pin the version, matching REA_PIN in cli.py (the Docker setup-rea path).
+# An unpinned @latest would execute whatever npm serves that day.
+DEFAULT_SERVER_CMD = ["npx", "-y", "rea-agents@6.7.0", "--mcp"]
 
 # Default to REA's static JavaScript/Electron analysis tool (needs no Ghidra or
 # native disassembly) -- the one the adapter is grounded on (rea_adapter

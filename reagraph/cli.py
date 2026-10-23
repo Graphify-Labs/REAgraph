@@ -372,7 +372,7 @@ def build_parser() -> argparse.ArgumentParser:
     pl.add_argument("--rea-cli-cmd", default=None,
                     help="analyze via the REA CLI (JSON) instead of MCP -- for large apps that "
                          "overflow REA's MCP stdio budget. Value is the REA CLI base, e.g. "
-                         "'npx -y rea-agents@latest'")
+                         "'npx -y rea-agents@6.7.0'")
     pl.add_argument("--graph", default=DEFAULT_GRAPH)
     pl.add_argument("--no-cache", action="store_true", help="always call REA, do not use the cache")
     pl.add_argument("--refresh", action="store_true", help="re-analyze and overwrite cached results")
